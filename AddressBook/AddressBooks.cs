@@ -9,7 +9,6 @@ namespace AddressBook
     class AddressBooks
     {
         List<Contact> addressBookList = new List<Contact>();
-
         public void CreateContact()
         {
             Contact contacts = new Contact();
@@ -111,19 +110,37 @@ namespace AddressBook
                 }
             }
         }
+        public void DeleteContact()
+            {         
+               Console.WriteLine("Enter the First Name to Check : ");
+               string firstName = Console.ReadLine();
+               foreach (Contact data in addressBookList)
+               {
+                  if (data.firstName == firstName)
+                 {
+                    addressBookList.Remove(data);
+                    Console.WriteLine("Contact delete Scccessfully");
+                    return;
+                  }
+               else
+               {
+                Console.WriteLine("No Contact Exists with this First Name : " + firstName);
+               }
+            }
+        }
         public void DisplayContact()
         {
-           Console.WriteLine("Contact Details");
             foreach (Contact display in addressBookList)
             {
-            Console.WriteLine(display.firstName);
-            Console.WriteLine(display.lastName);
-            Console.WriteLine(display.email);
-            Console.WriteLine(display.phoneNo);
-            Console.WriteLine(display.address);
-            Console.WriteLine(display.state);
-            Console.WriteLine(display.city);
-            Console.WriteLine(display.zipCode);
+               Console.WriteLine("Contact Details");
+               Console.WriteLine(display.firstName);
+               Console.WriteLine(display.lastName);
+               Console.WriteLine(display.email);
+               Console.WriteLine(display.phoneNo);
+               Console.WriteLine(display.address);
+               Console.WriteLine(display.state);
+               Console.WriteLine(display.city);
+               Console.WriteLine(display.zipCode);
             }
         }
     }
