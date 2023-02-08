@@ -110,6 +110,22 @@ namespace AddressBook
                 }
             }
         }
+        public void AddMultipleContact()
+        {
+            Console.WriteLine("Enter the number of Contacts to Add : ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    AddContact();
+                }
+            }
+            else 
+            {
+                Console.WriteLine("Enter the correct Number");
+            }
+        }
         public void DeleteContact()
             {         
                Console.WriteLine("Enter the First Name to Check : ");
