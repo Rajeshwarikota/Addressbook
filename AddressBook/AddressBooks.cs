@@ -125,27 +125,27 @@ namespace AddressBook
                     AddContact();
                 }
             }
-            else 
+            else
             {
                 Console.WriteLine("Enter the correct Number");
             }
         }
         public void DeleteContact()
-            {         
-               Console.WriteLine("Enter the First Name to Check : ");
-               string firstName = Console.ReadLine();
-               int count = 0;
-               foreach (Contact data in addressBookList)
-               {
-                  if (data.firstName == firstName)
-                  {
+        {
+            Console.WriteLine("Enter the First Name to Check : ");
+            string firstName = Console.ReadLine();
+            int count = 0;
+            foreach (Contact data in addressBookList)
+            {
+                if (data.firstName == firstName)
+                {
                     addressBookList.Remove(data);
                     Console.WriteLine("Contact delete Scccessfully");
                     count++;
                     break;
-                  }
-               }   
-                if (count < 1)
+                }
+            }
+            if (count < 1)
             {
                 Console.WriteLine("No Contact Exists with this First Name : " + firstName);
             }
@@ -153,16 +153,18 @@ namespace AddressBook
         }
         public void CreateAddressBooks()
         {
-            Console.WriteLine("Enter the Number of Address Book Needed : ");
+
+            Console.WriteLine("Enter the Name of Address Book : ");
+            string bookName = Console.ReadLine();
+            Console.WriteLine("Enter the Number of Contacts Needed : ");
             int n = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < n; i++)
+            while (n > 0)
             {
-                Console.WriteLine("Enter the Name of Address Book : ");
-                string bookName = Console.ReadLine();
                 AddMultipleContact();
-                books.Add(bookName, addressBookList.ToList());
-                Console.WriteLine("Address Book Created Suceessfully !");
+                n--;
             }
+            books.Add(bookName, addressBookList.ToList());
+            Console.WriteLine("Address Book Created Suceessfully !");
         }
         public void DisplayAddressBooks()
         {
@@ -212,5 +214,34 @@ namespace AddressBook
                 Console.WriteLine("No Contacts Exists !");
             }
         }
+            public void CheckDuplicateEntry()
+            {
+                Console.WriteLine("Enter the First Name to Check : ");
+                string fName = Console.ReadLine();
+                bool fCheck = addressBookList.Any(e => e.firstName.ToLower() == fName.ToLower());
+                if (fCheck)
+                {
+                    Console.WriteLine("Enter the Last Name to Check : ");
+                    string lName = Console.ReadLine();
+                    bool lCheck = addressBookList.Any(e => e.lastName.ToLower() == lName.ToLower());
+                    if (lCheck)
+                    {
+                        Console.WriteLine("Contact Already Exists\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Contact doesn't Exists");
+                        Console.WriteLine("Create New Contact");
+                        AddContact();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Contact doesn't Exists");
+                    Console.WriteLine("Create New Contact");
+                    AddContact();
+                }
+            }
+        }
     }
-}
+
