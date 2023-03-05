@@ -214,34 +214,26 @@ namespace AddressBook
                 Console.WriteLine("No Contacts Exists !");
             }
         }
-            public void CheckDuplicateEntry()
+        public void CheckDuplicateEntry()
+        {
+            Console.WriteLine("Enter the First Name to Check : ");
+            string fName = Console.ReadLine();
+            bool fCheck = addressBookList.Any(e => e.firstName.ToLower() == fName.ToLower());
+            if (fCheck)
             {
-                Console.WriteLine("Enter the First Name to Check : ");
-                string fName = Console.ReadLine();
-                bool fCheck = addressBookList.Any(e => e.firstName.ToLower() == fName.ToLower());
-                if (fCheck)
-                {
-                    Console.WriteLine("Enter the Last Name to Check : ");
-                    string lName = Console.ReadLine();
-                    bool lCheck = addressBookList.Any(e => e.lastName.ToLower() == lName.ToLower());
-                    if (lCheck)
-                    {
-                        Console.WriteLine("Contact Already Exists\n");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Contact doesn't Exists");
-                        Console.WriteLine("Create New Contact");
-                        AddContact();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Contact doesn't Exists");
-                    Console.WriteLine("Create New Contact");
-                    AddContact();
-                }
+
+                Console.WriteLine("Contact Already Exists\n");
+            }
+            else
+            {
+                Console.WriteLine("Contact doesn't Exists");
+                Console.WriteLine("Create New Contact");
+                AddContact();
             }
         }
+
     }
+}
+        
+ 
 
