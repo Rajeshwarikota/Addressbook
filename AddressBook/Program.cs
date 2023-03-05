@@ -46,7 +46,9 @@ namespace AddressBook
                     case 9:
                         Book.CheckDuplicateEntry();
                         break;
-                    
+                    case 10:
+                        Book.SearchPersonByCityOrState();
+                        break;
                     case 22:
                         flag = false;
                         break;
