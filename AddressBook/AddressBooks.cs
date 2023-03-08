@@ -14,6 +14,8 @@ namespace AddressBook
         Dictionary<string, List<Contact>> books = new Dictionary<string, List<Contact>>();
         Dictionary<string, List<Contact>> cityBook = new Dictionary<string, List<Contact>>();
         Dictionary<string, List<Contact>> stateBook = new Dictionary<string, List<Contact>>();
+        List<Contact> cityList = new List<Contact>();
+        List<Contact> stateList = new List<Contact>();
         public void CreateContact()
         {
             Contact contacts = new Contact();
@@ -41,20 +43,20 @@ namespace AddressBook
             Contact addContact = new Contact();
             Console.WriteLine("Enter First Name : ");
             addContact.firstName = Console.ReadLine();
-            Console.WriteLine("Enter Last Name : ");
-            addContact.lastName = Console.ReadLine();
-            Console.WriteLine("Enter Email : ");
-            addContact.email = Console.ReadLine();
-            Console.WriteLine("Enter Phone Number : ");
-            addContact.phoneNo = Console.ReadLine();
-            Console.WriteLine("Enter the Address : ");
-            addContact.address = Console.ReadLine();
-            Console.WriteLine("Enter State Name : ");
-            addContact.state = Console.ReadLine();
-            Console.WriteLine("Enter the City Name : ");
-            addContact.city = Console.ReadLine();
-            Console.WriteLine("Enter Zip Code : ");
-            addContact.zipCode = Console.ReadLine();
+            //Console.WriteLine("Enter Last Name : ");
+            //addContact.lastName = Console.ReadLine();
+            //Console.WriteLine("Enter Email : ");
+            //addContact.email = Console.ReadLine();
+            //Console.WriteLine("Enter Phone Number : ");
+            //addContact.phoneNo = Console.ReadLine();
+            //Console.WriteLine("Enter the Address : ");
+            //addContact.address = Console.ReadLine();
+            //Console.WriteLine("Enter State Name : ");
+            //addContact.state = Console.ReadLine();
+            //Console.WriteLine("Enter the City Name : ");
+            //addContact.city = Console.ReadLine();
+            //Console.WriteLine("Enter Zip Code : ");
+            //addContact.zipCode = Console.ReadLine();
 
             addressBookList.Add(addContact);
             Console.WriteLine("Contact Added Successfully!");
@@ -237,8 +239,7 @@ namespace AddressBook
         }
         public void SearchPersonByCityOrState()
         {
-            List<Contact> cityList = new List<Contact>();
-            List<Contact> stateList = new List<Contact>();
+
             Console.WriteLine("1.Search Person By State\n2.Search Person By City");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -316,6 +317,19 @@ namespace AddressBook
                         Console.WriteLine("Number of Contacts in City- {0} are {1}", State, stateList.Count);
                     }
                     break;
+            }
+        }
+        public void SortPersonUsingName()
+        {
+            foreach (var book in books)
+            {
+                
+
+                Console.WriteLine("AddressBook Name is: " + book.Key);
+                foreach (var contact in book.Value.OrderBy(e => e.firstName))
+                {
+                    Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                }
             }
         }
     }
