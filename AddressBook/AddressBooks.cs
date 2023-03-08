@@ -41,20 +41,20 @@ namespace AddressBook
             Contact addContact = new Contact();
             Console.WriteLine("Enter First Name : ");
             addContact.firstName = Console.ReadLine();
-            //Console.WriteLine("Enter Last Name : ");
-            //addContact.lastName = Console.ReadLine();
-            //Console.WriteLine("Enter Email : ");
-            //addContact.email = Console.ReadLine();
-            //Console.WriteLine("Enter Phone Number : ");
-            //addContact.phoneNo = Console.ReadLine();
-            //Console.WriteLine("Enter the Address : ");
-            //addContact.address = Console.ReadLine();
+            Console.WriteLine("Enter Last Name : ");
+            addContact.lastName = Console.ReadLine();
+            Console.WriteLine("Enter Email : ");
+            addContact.email = Console.ReadLine();
+            Console.WriteLine("Enter Phone Number : ");
+            addContact.phoneNo = Console.ReadLine();
+            Console.WriteLine("Enter the Address : ");
+            addContact.address = Console.ReadLine();
             Console.WriteLine("Enter State Name : ");
             addContact.state = Console.ReadLine();
             Console.WriteLine("Enter the City Name : ");
             addContact.city = Console.ReadLine();
-            //Console.WriteLine("Enter Zip Code : ");
-            //addContact.zipCode = Console.ReadLine();
+            Console.WriteLine("Enter Zip Code : ");
+            addContact.zipCode = Console.ReadLine();
 
             addressBookList.Add(addContact);
             Console.WriteLine("Contact Added Successfully!");
@@ -284,8 +284,42 @@ namespace AddressBook
                     break;
             }
         }
+        public void CountContactsByCityOrState()
+        {
+            List<Contact> cityList = new List<Contact>();
+            List<Contact> stateList = new List<Contact>();
+            Console.WriteLine("1.Select Whether to Count Contacts by\n1.City\n2.State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter the City Name : ");
+                    string City = Console.ReadLine();
+                    foreach (var Key in books)
+                    {
+                        foreach (var Data in Key.Value.FindAll(e => e.city.ToLower() == City.ToLower()))
+                        {
+                            cityList.Add(Data);
+                        }
+                        Console.WriteLine("Number of Contacts in City- {0} are {1}", City, cityList.Count);
+                    }
+                    break;
+                case 2:
+                    Console.Write("Enter the state Name : ");
+                    string State = Console.ReadLine();
+                    foreach (var Key in books)
+                    {
+                        foreach (var Data in Key.Value.FindAll(e => e.state.ToLower() == State.ToLower()))
+                        {
+                            stateList.Add(Data);
+                        }
+                        Console.WriteLine("Number of Contacts in City- {0} are {1}", State, stateList.Count);
+                    }
+                    break;
+            }
+        }
     }
 }
-
+    
 
 
