@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -332,8 +333,25 @@ namespace AddressBook
                 }
             }
         }
+        public void ReadAndWriteAddressBookContactsToFile()
+        {
+            string filePath = @"C:\Users\LENOVO\source\repos\AddressBook\AddressBook\FileOperation.text";
+            StreamWriter writer = new StreamWriter(filePath);
+            foreach (var contact in addressBookList)
+            {
+               
+                    writer.WriteLine("Contact Details:" + "\nName: " + contact.firstName + " " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                
+            }
+            writer.Close();
+            StreamReader reader = new StreamReader(filePath);
+            Console.WriteLine(reader.ReadToEnd());
+            reader.Close();
+            Console.WriteLine("Contacts Added to file");
+        }
     }
 }
+    
     
 
 
