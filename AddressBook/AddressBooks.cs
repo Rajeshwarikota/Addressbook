@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -324,7 +326,7 @@ namespace AddressBook
         {
             foreach (var book in books)
             {
-                
+
 
                 Console.WriteLine("AddressBook Name is: " + book.Key);
                 foreach (var contact in book.Value.OrderBy(e => e.firstName))
@@ -339,9 +341,7 @@ namespace AddressBook
             StreamWriter writer = new StreamWriter(filePath);
             foreach (var contact in addressBookList)
             {
-               
-                    writer.WriteLine("Contact Details:" + "\nName: " + contact.firstName + " " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
-                
+                writer.WriteLine("Contact Details:" + "\nName: " + contact.firstName + " " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
             }
             writer.Close();
             StreamReader reader = new StreamReader(filePath);
@@ -349,9 +349,26 @@ namespace AddressBook
             reader.Close();
             Console.WriteLine("Contacts Added to file");
         }
+        public void ReadAndWriteCSVFile()
+        {
+            string filePath = @"C:\Users\LENOVO\source\repos\AddressBook\AddressBook\Files.csv";
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                using (CsvWriter csvImport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csvImport.WriteRecords<Contact>(addressBookList);
+                }
+                writer.Close();
+            }
+            using (StreamReader record = new StreamReader(filePath))
+            using (CsvReader csv = new CsvReader(record, CultureInfo.InvariantCulture))
+            {
+                var item = csv.GetRecords<Contact>();
+                foreach (Contact contact in item)
+                {
+                    Console.WriteLine("Contact Details:" + "\nFirst Name: " + contact.firstName + "\nLast Name: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                }
+            }
+        }
     }
 }
-    
-    
-
-
